@@ -1,7 +1,7 @@
 ﻿// Problem No : 4
 // Auther : vinothkanth
 //
-// Test Case for Room Rent 
+// Test Case for Room Rents
 //
 //
 //
