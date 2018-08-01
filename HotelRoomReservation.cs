@@ -37,8 +37,6 @@ namespace HotelRentSystem
             string roomRentDetails = string.Empty;
             try
             {
-                Console.WriteLine("Enter the room detail in formate of \n ");
-                Console.WriteLine("<customer_type (Rewarded or Regular)> : <YYYY/MM/DD>, <YYYY/MM/DD>, ... ");
                 roomRentDetails = Convert.ToString(Console.ReadLine());
             }
             catch (ArgumentNullException exception)
@@ -61,7 +59,6 @@ namespace HotelRentSystem
             try
             {
                 afterSplitData = splitData.Split(splitTo);
-
             }
             catch (IndexOutOfRangeException arrayIndexException)
             {
@@ -91,11 +88,6 @@ namespace HotelRentSystem
                 else if (customerType == "regular" || customerType == "Regular")
                 {
                     return 0;
-                }
-                else
-                {
-                    Console.WriteLine("User Not Valid");
-                    setRoomDetail();
                 }
             }
             catch (ArithmeticException arithmeticException)
@@ -155,22 +147,15 @@ namespace HotelRentSystem
         /// </summary>
         /// <param name="roomBookingDetail">string of  customer type with booking date</param>
         /// <returns>string or discount amount detail</returns>
-        public static string generatingDiscountReport(string roomBookingDetail)
+        public static double totalAmountOfRoomRent(string customerDescountType, string[] roomBookingDetail)
         {
-            string discountAmountDetail = string.Empty;
+            double discountAmountDetail = 0.0;
             try
             {
-                string[] splitDataAsCollen = HotelRoomReservation.splitDataAsGivenCharacter(roomBookingDetail, ':');
-                string[] bookingDates = HotelRoomReservation.splitDataAsGivenCharacter(splitDataAsCollen[1], ',');
-                double totalOfCost = 0.0;
-                foreach (var checkDate in bookingDates)
+                foreach (var checkDate in roomBookingDetail)
                 {
-                    totalOfCost += checkWeekEnd(checkDate);
+                    discountAmountDetail += checkWeekEnd(checkDate);
                 }
-
-                double discountAmount =  roomRentDiscount(splitDataAsCollen[0].Trim(), totalOfCost);
-
-                discountAmountDetail = "Total Cost  : " + totalOfCost + ", Total Discount : " + discountAmount  + ", Net pay : " + (totalOfCost - discountAmount);
             }
             catch (IndexOutOfRangeException e)
             {
@@ -187,8 +172,20 @@ namespace HotelRentSystem
         /// <param name="args"></param>
         static void Main(string[] args)
         {
+            //get room details
+            Console.WriteLine("Enter the room detail in formate of \n ");
+            Console.WriteLine("<customer_type (Rewarded or Regular)> : <YYYY/MM/DD>, <YYYY/MM/DD>, ... ");
             string roomRent =  HotelRoomReservation.setRoomDetail();
-            Console.WriteLine(HotelRoomReservation.generatingDiscountReport(roomRent));
+
+            // split it us booking date and customer type
+            string[] splitDataAsCollen = splitDataAsGivenCharacter(roomRent, ':');
+            string[] bookingDates = splitDataAsGivenCharacter(splitDataAsCollen[1], ',');
+            string customerType = splitDataAsCollen[0].Trim();
+
+            double totalAmount = HotelRoomReservation.totalAmountOfRoomRent(customerType, bookingDates);
+            double paymentDiscount = roomRentDiscount(customerType, totalAmount);
+            string discountAmountDetail = string.Format( "Total Cost  : " + totalAmount + ", Total Discount : " + paymentDiscount + ", Net pay : " + (totalAmount - paymentDiscount));
+            Console.WriteLine(discountAmountDetail);
             Console.ReadKey();
         }
     }

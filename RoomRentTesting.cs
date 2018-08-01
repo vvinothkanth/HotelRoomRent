@@ -1,7 +1,7 @@
 ﻿// Problem No : 4
 // Auther : vinothkanth
 //
-// Test Case for Room Rents
+// Test Case for Room Rent 
 //
 //
 //
@@ -77,9 +77,9 @@ namespace HotelTesting
         [TestMethod]
         public void checkGenerateReport()
         {
-            string report = HotelRoomReservation.generatingDiscountReport("regular:2018/7/7,2018/6/6");
-            Assert.AreEqual("Total Cost  : 1100, Total Discount : 0, Net pay : 1100", report);
-            Assert.AreNotEqual("Total Cost  : 1100, Total Discount : 1100, Net pay : 100", report);
+            double report = HotelRoomReservation.totalAmountOfRoomRent("regular", new string[]{"2018/7/7","2018/6/6"});
+            Assert.AreEqual(1100, report);
+            Assert.AreNotEqual(1000, report);
 
         }
     }
