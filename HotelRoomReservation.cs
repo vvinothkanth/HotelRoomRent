@@ -29,6 +29,21 @@ namespace HotelRentSystem
     public class HotelRoomReservation
     {
         /// <summary>
+        /// 
+        /// </summary>
+        private double CookingCost;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double MyProperty
+        {
+            get { return CookingCost; }
+            set { CookingCost = value; }
+        }
+        
+
+        /// <summary>
         /// To read and return the customer type and booking room dates
         /// </summary>
         /// <returns>the formated input of customer type and date</returns>
