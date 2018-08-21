@@ -1,16 +1,6 @@
 ﻿//*****************************
-//
 // Auther : vinothkanth
 // Problem No : 4
-//
-// We have one hotel with fixed room rate for week day and week end  i.e., one room's week 
-// day cost is 500 rupees and weekend's cost is 600 Rupees, and there are two types of customer,
-// rewarded and regular, if regular, there will not be any change in room cost but if rewarded, 
-// they will get 5% discount if the total cost is above 1000 Rupees. So, customer will come and 
-// enter the dates for on which they need rooms, your program should see the date and determine 
-// whether it is week day or weekend and based on that customer type and dates, it should display 
-// the total amount with discount applied.
-//
 //******************************
 
 /// <summary>
@@ -57,7 +47,7 @@ namespace HotelRentSystem
             catch (ArgumentNullException exception)
             {
                 Console.WriteLine(exception);
-                throw new ArgumentNullException(exception.Message);
+                throw;
             }
             return roomRentDetails;
         }
@@ -78,7 +68,7 @@ namespace HotelRentSystem
             catch (IndexOutOfRangeException arrayIndexException)
             {
                 Console.WriteLine(arrayIndexException);
-                throw new IndexOutOfRangeException(arrayIndexException.Message);
+                throw;
             }
             return afterSplitData;
         }
@@ -108,7 +98,7 @@ namespace HotelRentSystem
             catch (ArithmeticException arithmeticException)
             {
                 Console.WriteLine(arithmeticException);
-                throw new ArithmeticException(arithmeticException.Message);
+                throw;
             }
 
             return 0;
@@ -130,7 +120,8 @@ namespace HotelRentSystem
                 if (splitDateAsDash.Length == 3)
                 {
                     DateTime CheckBookingDay = new DateTime(Convert.ToInt32(splitDateAsDash[0].Trim()), Convert.ToInt32(splitDateAsDash[1].Trim()), Convert.ToInt32(splitDateAsDash[2].Trim()));
-                    if ((CheckBookingDay.DayOfWeek == DayOfWeek.Sunday) == true || (CheckBookingDay.DayOfWeek == DayOfWeek.Saturday) == true)
+                    bool isWeekEnd = (CheckBookingDay.DayOfWeek == DayOfWeek.Sunday) == true || (CheckBookingDay.DayOfWeek == DayOfWeek.Saturday) == true;
+                    if (isWeekEnd)
                     {
                         roomRentAmount = 600;
                     }
@@ -150,7 +141,7 @@ namespace HotelRentSystem
             catch (IndexOutOfRangeException dateConnotBeSplit)
             {
                 Console.WriteLine(dateConnotBeSplit);
-                throw new IndexOutOfRangeException(dateConnotBeSplit.Message);
+                throw;
             }
 
             return roomRentAmount;
@@ -175,7 +166,7 @@ namespace HotelRentSystem
             catch (IndexOutOfRangeException e)
             {
                 Console.WriteLine(e);
-                throw new IndexOutOfRangeException(e.Message);
+                throw;
             }
 
             return discountAmountDetail;
