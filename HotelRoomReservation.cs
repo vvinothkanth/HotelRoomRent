@@ -172,18 +172,12 @@ namespace HotelRentSystem
             return discountAmountDetail;
         }
 
-        /// <summary>
-        /// The Main Method
-        /// </summary>
-        /// <param name="args"></param>
         static void Main(string[] args)
         {
-            //get room details
             Console.WriteLine("Enter the room detail in formate of \n ");
             Console.WriteLine("<customer_type (Rewarded or Regular)> : <YYYY/MM/DD>, <YYYY/MM/DD>, ... ");
             string roomRent =  HotelRoomReservation.setRoomDetail();
 
-            // split it us booking date and customer type
             string[] splitDataAsCollen = splitDataAsGivenCharacter(roomRent, ':');
             string[] bookingDates = splitDataAsGivenCharacter(splitDataAsCollen[1], ',');
             string customerType = splitDataAsCollen[0].Trim();
