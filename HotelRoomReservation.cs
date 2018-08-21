@@ -1,5 +1,4 @@
-﻿//*****************************
-// Auther : vinothkanth
+﻿// Auther : vinothkanth
 // Problem No : 4
 //******************************
 
